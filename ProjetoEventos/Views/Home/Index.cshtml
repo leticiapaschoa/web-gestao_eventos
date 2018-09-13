@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<html>
+<body>
+    <p class="slogan">Nossa alegria é fazer você feliz.</p>
+    <div class="container">
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" target="_blank" class="btn">Login</button>
+    </div>
+    <div class="menu">
+        @if (ViewBag.Usuario == null)
+        {
+            <div id="id01" class="modal">
+                <form class="modal-content animate" action="" method="post">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    </div>
+                    <div class="container">
+                        <label for="usuario" class="txt"><b>Username</b></label><br>
+                        <input type="text" placeholder="Enter Username" name="usuario" required>
+                        <br>
+                        <label for="senha" class="txt"><b>Password</b></label><br>
+                        <input type="password" placeholder="Enter Password" name="senha" required>
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="lista-menu">
+                <span><a href="Historia">Sobre</a></span>
+                <span><a href="Galeria">Galeria</a></span>
+                <span><a href="Noticias">Notícias</a></span>
+                @*<a id="logo" href="Index"><img src="~/Imagens/logo.png" /></a>*@
+                <span><a href="Cardapio">Cardápio</a></span>
+                <span><a href="Contato">Contato</a></span>
+                <span><a href="Sair">Sair</a></span>
+                <div>
+                    <p>Oi, oi gente!!!!!, @(ViewBag.Usuario) :)</p>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
