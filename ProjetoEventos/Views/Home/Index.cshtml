@@ -3,13 +3,12 @@
 }
 <html>
 <body>
-    <p class="slogan">Nossa alegria é fazer você feliz.</p>
-    <div class="container">
-        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" target="_blank" class="btn">Login</button>
-    </div>
-    <div class="menu">
         @if (ViewBag.Usuario == null)
         {
+            <div class="container">
+                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" target="_blank" class="btn">Login</button>
+            </div>
+
             <div id="id01" class="modal">
                 <form class="modal-content animate" action="" method="post">
                     <div class="imgcontainer">
@@ -28,19 +27,19 @@
         }
         else
         {
-            <div class="lista-menu">
-                <span><a href="Historia">Sobre</a></span>
-                <span><a href="Galeria">Galeria</a></span>
-                <span><a href="Noticias">Notícias</a></span>
-                @*<a id="logo" href="Index"><img src="~/Imagens/logo.png" /></a>*@
-                <span><a href="Cardapio">Cardápio</a></span>
-                <span><a href="Contato">Contato</a></span>
-                <span><a href="Sair">Sair</a></span>
-                <div>
-                    <p>Oi, oi gente!!!!!, @(ViewBag.Usuario) :)</p>
-                </div>
+            <div class="topnav" id="myTopnav">
+                <a href="#home" class="active">Home</a>
+                <a href="#agenda">Agenda</a>
+                <a href="#NovoEvento">Novo Evento</a>
+                <a href="#financeiro">Financeiro</a>
+                <a href="#sair">Sair</a>
+                <a href="javascript:void(0);" class="icon" onclick="Menu()">
+                    <i class="fa fa-bars"></i>
+                </a>
             </div>
-        }
-    </div>
+         }
+
+
+            
 </body>
 </html>
