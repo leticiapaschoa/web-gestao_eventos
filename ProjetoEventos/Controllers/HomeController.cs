@@ -39,10 +39,10 @@ namespace ProjetoEventos.Controllers
             return View();
         }
 
-        public ActionResult Sair()
+        public ActionResult NovoEvento()
         {
             Session.Clear();
-            Response.Redirect("Index");
+            Response.Redirect("NovoEvento");
             return View();
 
         }

@@ -3,43 +3,41 @@
 }
 <html>
 <body>
-        @if (ViewBag.Usuario == null)
-        {
-            <div class="container">
-                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" target="_blank" class="btn">Login</button>
+    @if (ViewBag.Usuario == null)
+    {
+        <div class="container">
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" target="_blank" class="btn">Login</button>
+        </div>
+        <div id="id01" class="modal">
+            <form class="modal-content animate" action="" method="post">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                <div class="container">
+                    <label for="usuario" class="txt"><b>Username</b></label><br>
+                    <input type="text" placeholder="Enter Username" name="usuario" required>
+                    <br>
+                    <label for="senha" class="txt"><b>Password</b></label><br>
+                    <input type="password" placeholder="Enter Password" name="senha" required>
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top">
+                   <div class="navbar-collapse collapse">
+                       <ul class="nav navbar-nav">
+                           <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                           <li>@Html.ActionLink("Novo Evento", "NovoEvento", "Home")</li>
+                           <li>@Html.ActionLink("Agenda", "Contact", "Home")</li>
+                           <li>@Html.ActionLink("Financeiro", "Contact", "Home")</li>
+                           <li>@Html.ActionLink("Sair", "Contact", "Home")</li>
+                       </ul>
+                </div>
             </div>
-
-            <div id="id01" class="modal">
-                <form class="modal-content animate" action="" method="post">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    </div>
-                    <div class="container">
-                        <label for="usuario" class="txt"><b>Username</b></label><br>
-                        <input type="text" placeholder="Enter Username" name="usuario" required>
-                        <br>
-                        <label for="senha" class="txt"><b>Password</b></label><br>
-                        <input type="password" placeholder="Enter Password" name="senha" required>
-                        <button type="submit">Login</button>
-                    </div>
-                </form>
-            </div>
-        }
-        else
-        {
-            <div class="topnav" id="myTopnav">
-                <a href="#home" class="active">Home</a>
-                <a href="#agenda">Agenda</a>
-                <a href="#NovoEvento">Novo Evento</a>
-                <a href="#financeiro">Financeiro</a>
-                <a href="#sair">Sair</a>
-                <a href="javascript:void(0);" class="icon" onclick="Menu()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
-         }
-
-
-            
+         
+    }
 </body>
 </html>
