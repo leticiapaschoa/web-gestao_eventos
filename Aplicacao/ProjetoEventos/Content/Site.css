@@ -85,6 +85,21 @@ button {
         opacity: 0.8;
     }
 
+    button#Search {
+        background: #f7f4f4;
+        margin-left: -1%;
+        border: 0px;
+        padding: 1% 1% 0.3% 0%;
+        width: 7.5%;
+    }
+    button#datepicker {
+        background: #f7f4f4;
+        margin-left: -1%;
+        border: 0px;
+        padding: 1% 1% 0.3% 0%;
+        width: 7.5%;
+    }
+
 /* Extra styles for the cancel button */
 .cancelbtn {
     width: auto;
@@ -194,4 +209,11 @@ span.psw {
         width: 100%;
     }
 }
-
+select#type {
+    width: 92%;
+    padding: 1% 5%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}

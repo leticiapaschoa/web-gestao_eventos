@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<html>
+<head>
+    <!--  jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+        
+    @section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+         $(document).ready(function () {
+             $('button[id=datepicker]').datepicker({
+                 dateFormat: "dd/M/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+          });   
+    </script>
+    }
+</head>
+
+<body>
+    @{
+        Html.RenderPartial("_Menu");
+    }
+
+    <form id="cadastroEvento">
+        <p class="nome">
+            <label for="nome">CPF: </label>
+            <input type="text" id="nomeid" required="required" name="cpf" />
+            <button onclick="document.getElementById('idBuscaCliente').style.display='block'" style="width:auto;" target="_blank" id="Search" type="submit"><img src="~/Img/Icon/findClient.png" /></button>
+        </p>
+
+        <p class="tipo">
+            <label for="tipo">Evento: </label>
+            @Html.DropDownList("type", EnumHelper.GetSelectList(typeof(ProjetoEventos.Enum.ETiposEvento)), "Selecione o tipo do evento")
+        </p>
+
+        <p class="data">
+            <label for="data">Data:</label>
+            <input type="text" id="data" required="required" placeholder="MM/DD/YYY" name="data">
+            <button id="datepicker" name="datepicker"><img src="~/Img/Icon/calendar.png" /></button>
+        </p>
+    </form>
+
+
+
+
+    <div id="idBuscaCliente" class="modal">
+        <form class="modal-content animate" action="" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('idBuscaCliente').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+            <div class="container">
+                <label for="usuario" class="txt"><b>Username</b></label><br>
+                <input type="text" placeholder="Enter Username" name="usuario" required>
+                <br>
+                <label for="senha" class="txt"><b>Password</b></label><br>
+                <input type="password" placeholder="Enter Password" name="senha" required>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+</html>

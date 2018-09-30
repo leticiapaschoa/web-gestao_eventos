@@ -25,7 +25,7 @@ namespace ProjetoEventos.Controllers
                 login.Usuario = Usuario;
                 login.Senha = Senha;
 
-                if (login.Buscar())
+                if (login.RealizarLogin())
                 {
                     Session["Usuario"] = Usuario;
                     Response.Redirect("Index");
@@ -37,15 +37,7 @@ namespace ProjetoEventos.Controllers
             }
 
             return View();
-        }
-
-        public ActionResult NovoEvento()
-        {
-            Session.Clear();
-            Response.Redirect("NovoEvento");
-            return View();
-
-        }
+        }       
 
     }
 }
