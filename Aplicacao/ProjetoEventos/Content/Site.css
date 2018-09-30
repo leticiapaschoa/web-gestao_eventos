@@ -60,7 +60,7 @@ h2.name_company {
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=number], input[type=date] {
     width: 92%;
     padding: 1% 5%;
     margin: 8px 0;
@@ -86,10 +86,10 @@ button {
     }
 
     button#Search {
-        background: #f7f4f4;
-        margin-left: -1%;
+        background: transparent;
+        margin-left: -10%;
         border: 0px;
-        padding: 1% 1% 0.3% 0%;
+        padding: 1% 1% 0.7% 0%;
         width: 7.5%;
     }
     button#datepicker {
@@ -216,4 +216,56 @@ select#type {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+}
+form#cadastroEvento {
+    width: 339%;
+    margin-left: -440px;
+    padding: 0%;
+    margin-top: 16%;
+}
+
+td#cpf {
+    padding-left: 1.5%;
+}
+
+input#nomeid {
+    padding: 1% 0% 1% 72%;
+}
+
+td#nome {
+    width:40%;
+    padding-left: 3%;
+}
+
+input#qnt {
+    width: 17%;
+}
+
+td#dataEvento {
+    padding-left: 3.8%;
+}
+
+input#data {
+     padding: 1% 0% 1% 73.3%;
+}
+
+td#cep_table {
+    padding-left: 1.5%;
+}
+
+input#rua {
+    padding: 1% 0% 1% 4.1%;
+}
+
+
+input#nro {
+    width: 17%;
+}
+
+td#nro {
+    padding-left: 4.8%;
+}
+
+td#rua_table {
+    padding-left: 4%;
 }
