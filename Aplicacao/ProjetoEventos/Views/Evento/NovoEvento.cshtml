@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ProjetoEventos.Enum
+@model ProjetoEventos.Models.Evento
+@{
     ViewBag.Title = "Home Page";
 }
 <html>
@@ -68,6 +70,18 @@
                 <td id="nro">
                     <label for="cep">Número:</label>
                     <input type="number" id="nro" name="nro" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Selecione os serviços desejados:</p>
+                    @foreach (var value in Enum.GetValues(typeof(EServicos)))
+                    {
+                        var name = Enum.GetName(typeof(EServicos), value);
+                        <input type="checkbox" id="dayofweek" name="dayofweek" value=@name />
+                        <label for="dayofweek">@name</label><br>                    
+                    }
                 </td>
             </tr>
         </table>

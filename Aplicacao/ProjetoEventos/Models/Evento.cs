@@ -14,5 +14,6 @@ namespace ProjetoEventos.Models
         public DateTime DataEvento { get; set; }
         public String CEP { get; set; }
         public int QntPessoas { get; set; }
+        public List<EServicos> Servicos { get; set; }
     }
 }

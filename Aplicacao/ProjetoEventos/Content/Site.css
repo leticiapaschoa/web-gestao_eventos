@@ -1,8 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background: url(../Img/casamento_1.png);
-    
+    background: url(../Img/casamento_1.png);    
     background-position: top;
 }
 
@@ -282,4 +281,9 @@ button#cadastroEvento{
     width: 22%;
     margin-left: 37%;
     margin-top: 2%;
+}
+
+td#servicos {
+    padding: 1%;
+    font-weight: bold;
 }
