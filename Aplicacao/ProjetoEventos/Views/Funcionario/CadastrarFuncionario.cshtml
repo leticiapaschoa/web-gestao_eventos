@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Cadastro Funcionario";
+}
+<html>
+<body>
+
+    @{
+        Html.RenderPartial("_Menu");
+    }
+
+    <form id="cadastroEvento">
+
+        <table style="width:100%">
+            <tr>
+                <td id="cpf">
+                    <label for="cpf">CPF: </label>
+                    <input type="text" id="cpf" required="required" name="cpf" />
+                </td>
+
+                <td id="nome">
+                    <label for="nome">Nome: </label>
+                    <input type="text" id="nomeid" required="required" name="nome" />
+                </td>
+            </tr>
+
+            <tr>
+                <td id="tipoEvento">
+                    <label for="perfil">Perfil: </label>
+                    @Html.DropDownList("type", EnumHelper.GetSelectList(typeof(ProjetoEventos.Enum.ETipoPerfil)), "Selecione o perfil")
+                </td>
+
+                <td id="dataEvento">
+                    <label for="senha">E-mail:</label>
+                    <input type="email" name="email">
+                </td>
+
+
+            </tr>
+
+            <tr>
+                <td id="cep_table">
+                    <label for="cep">Usuário:</label>
+                    <input type="text" id="user" required="required" name="user" />
+                </td>
+                <td id="rua_table">
+                    <label for="cep">Senha:</label>
+                    <input type="password" id="senha" required="required" name="senha" />
+                </td>
+
+            </tr>
+        </table>
+
+        <button id="cadastrarEvento" type="submit">Cadastrar funcionário</button>
+
+    </form>
+</body>
+</html>

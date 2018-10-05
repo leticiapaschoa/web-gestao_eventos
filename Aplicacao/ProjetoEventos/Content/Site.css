@@ -271,3 +271,15 @@ td#nro {
 td#rua_table {
     padding-left: 4%;
 }
+
+button#cadastroEvento{
+    background-color: black;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    border: none;
+    cursor: pointer;
+    width: 22%;
+    margin-left: 37%;
+    margin-top: 2%;
+}

@@ -1,16 +1,17 @@
 ﻿using MySql.Data.MySqlClient;
+using ProjetoEventos.Enum;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
 namespace ProjetoEventos.Models
 {
-    public class Login
+    public class Funcionario : Pessoa
     {
+        public ETipoPerfil perfil { get; set; }
+
         public String Usuario { get; set; }
 
         public String Senha { get; set; }
@@ -19,7 +20,7 @@ namespace ProjetoEventos.Models
         {
 
             string strConn = "server = localhost; User Id = leticiaps; database = projetoeventos; password = larissa_7898";
-            
+
             MySqlConnection cn = new MySqlConnection(strConn);
             MySqlCommand cmd = new MySqlCommand();
             {
