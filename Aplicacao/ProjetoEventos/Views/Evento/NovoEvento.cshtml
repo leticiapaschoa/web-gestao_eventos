@@ -47,13 +47,13 @@
                 </td>
 
                 <td id="dataEvento">
-                    <label for="data">Data:</label>
-                    <input type="date" name="data" min="2018-10-01" max="2070-01-01">
+                    <label for="dataEvento">Data:</label>
+                    <input type="date" name="dataEvento" min="2018-10-01" max="2070-01-01">
                 </td>
 
                 <td id="qntConvidados">
                     <label for="qnt">Nro. Convidados:</label>
-                    <input type="number" id="qnt" name="qnt" />
+                    <input type="number" id="qntConvidados" name="qntConvidados" />
                 </td>
             </tr>
 
@@ -63,12 +63,12 @@
                     <input type="text" id="cep" required="required" name="cep" />
                 </td>
                 <td id="rua_table">
-                    <label for="cep">Rua:</label>
+                    <label for="rua">Rua:</label>
                     <input type="text" id="rua" required="required" name="rua" />
                 </td>
 
                 <td id="nro">
-                    <label for="cep">Número:</label>
+                    <label for="nro">Número:</label>
                     <input type="number" id="nro" name="nro" />
                 </td>
             </tr>
@@ -79,8 +79,8 @@
                     @foreach (var value in Enum.GetValues(typeof(EServicos)))
                     {
                         var name = Enum.GetName(typeof(EServicos), value);
-                        <input type="checkbox" id="dayofweek" name="dayofweek" value=@name />
-                        <label for="dayofweek">@name</label><br>                    
+                        <input type="checkbox" id="servicos" name="servicos" value=@name />
+                        <label for="servicos">@name</label><br>                    
                     }
                 </td>
             </tr>
@@ -99,12 +99,15 @@
                 <span onclick="document.getElementById('idBuscaCliente').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
             <div class="container">
-                <label for="usuario" class="txt"><b>Username</b></label><br>
-                <input type="text" placeholder="Enter Username" name="usuario" required>
+                <label for="nome_cliente" class="txt"><b>Nome:</b></label><br>
+                <input type="text" name="nome_cliente" required>
                 <br>
-                <label for="senha" class="txt"><b>Password</b></label><br>
-                <input type="password" placeholder="Enter Password" name="senha" required>
-                <button type="submit">Login</button>
+                <label for="email_cliente" class="txt"><b>E-mail:</b></label><br>
+                <input type="text" name="email_cliente">
+                <br>
+                <label for="telefone_cliente" class="txt"><b>Telefone:</b></label><br>
+                <input type="text" name="telefone_cliente">
+                <button type="submit">Atualizar</button>
             </div>
         </form>
     </div>

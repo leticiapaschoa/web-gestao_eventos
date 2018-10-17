@@ -25,10 +25,11 @@ namespace ProjetoEventos.Controllers
                 funcionario.Usuario = Usuario;
                 funcionario.Senha = Senha;
 
-                if (funcionario.RealizarLogin())
+                if (funcionario.RealizarLogin(funcionario))
                 {
                     Session["Usuario"] = Usuario;
                     Response.Redirect("Index");
+                    ViewBag.Usuario = Usuario;
                 }
                 else
                 {

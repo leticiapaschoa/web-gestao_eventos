@@ -11,9 +11,21 @@ Celular VARCHAR(16),
 IDevent INTEGER
 );
 
-CREATE TABLE Funcionario (
-IDfunc INTEGER PRIMARY KEY AUTO_INCREMENT,
-Nfunc VARCHAR(50),
-Usuariofun VARCHAR(12),
-Senhafun VARCHAR(8)
+
+
+
+-- TABELA PERFIL
+CREATE TABLE tipoPerfil(
+    cod_perfil INT IDENTITY(1,1) PRIMARY KEY,
+    desc_perfil VARCHAR (15)
+);
+
+-- TABELA FUNCIONARIO
+CREATE TABLE funcionario(
+    cod_func INT IDENTITY(1,1) PRIMARY KEY,
+    nome_func VARCHAR(50),
+    cpf_func VARCHAR(14),
+    usu_func VARCHAR(15),
+    senha_func VARCHAR(20),
+    perfil_func INT FOREIGN KEY REFERENCES tipoPerfil(cod_perfil)
 );

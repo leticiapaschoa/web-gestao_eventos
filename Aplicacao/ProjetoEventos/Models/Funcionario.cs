@@ -1,10 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using ProjetoEventos.Enum;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
+using System.Data.SqlClient;
 
 namespace ProjetoEventos.Models
 {
@@ -15,40 +13,35 @@ namespace ProjetoEventos.Models
         public String Usuario { get; set; }
 
         public String Senha { get; set; }
+        
 
-        public bool RealizarLogin()
+        public bool RealizarLogin(Funcionario func)
         {
+            var stringConnexao = "Server=tcp:unimetrocamp-project.database.windows.net,1433;Initial Catalog=GestaoEvento;Persist Security Info=False;User ID=leticiaps;Password=leticia_paschoa18;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            SqlDataReader reader =  null;
 
-            string strConn = "server = localhost; User Id = leticiaps; database = projetoeventos; password = larissa_7898";
+            bool login = false;
+            try { 
+                var connection = new SqlConnection(stringConnexao);
+                connection.Open();
 
-            MySqlConnection cn = new MySqlConnection(strConn);
-            MySqlCommand cmd = new MySqlCommand();
-            {
+                var cmd = new SqlCommand("LOGIN_S_FUNCIONARIO", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "LOGIN_S_FUNCIONARIO";
-                cmd.Parameters.AddWithValue("@usuario", this.Usuario);
-                cmd.Parameters.AddWithValue("@senha", this.Senha);
-                cmd.Connection = cn;
-                try
-                {
-                    cmd.Connection.Open();
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                cmd.Parameters.Add("@usuario ", SqlDbType.VarChar).Value = func.Usuario;
+                cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = func.Senha;
+                reader = cmd.ExecuteReader();
 
-                    if (dr.Read())
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                }
-                catch
-                {
-                    return false;
-                }
+                login = (reader.HasRows) ? true : false;
+                connection.Close();
             }
+            catch (Exception ex)
+            {
+                
+                
+            }
+            
+            return login;
         }
+
     }
 }
