@@ -1,12 +1,13 @@
-CREATE DEFINER=`leticiaps`@`%` PROCEDURE `LOGIN_S_FUNCIONARIO`(
-	IN usuario varchar(30),
-    IN senha varchar(30)
+CREATE PROCEDURE LOGIN_S_FUNCIONARIO(
+	@usuario varchar(15),
+    @senha varchar(20)
 )
+AS
 BEGIN
 
-	SELECT f.IDfunc
-    FROM FUNCIONARIO F
-    WHERE F.Usuariofun = usuario
-    AND F.Senhafun = senha;
+	SELECT 1
+    FROM funcionario f
+    WHERE f.usu_func = @usuario
+    AND f.senha_func = @senha;
 
 END

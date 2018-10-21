@@ -3,9 +3,11 @@
 namespace ProjetoEventos.Enum
 {
     public enum EServicos
-    {
-        [Display(Name = "Decoração")]
-        Decoracao,
-        Buffet
+    {        
+        Buffet,        
+        Decoração,
+        Local,
+        Segurança
+
     }
-}
+ }

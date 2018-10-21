@@ -21,14 +21,15 @@ namespace ProjetoEventos.Controllers
                 String Usuario = Request.Form["usuario"].ToString();
                 String Senha = Request.Form["senha"].ToString();
 
-                Login login = new Login();
-                login.Usuario = Usuario;
-                login.Senha = Senha;
+                Funcionario funcionario = new Funcionario();
+                funcionario.Usuario = Usuario;
+                funcionario.Senha = Senha;
 
-                if (login.RealizarLogin())
+                if (funcionario.RealizarLogin(funcionario))
                 {
                     Session["Usuario"] = Usuario;
                     Response.Redirect("Index");
+                    ViewBag.Usuario = Usuario;
                 }
                 else
                 {

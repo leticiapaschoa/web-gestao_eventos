@@ -1,7 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background: url(../Img/casamento_1.png);
+    background: url(../Img/casamento_1.png);    
+    background-position: top;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -60,7 +61,7 @@ h2.name_company {
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password], input[type=number], input[type=date] {
+input[type=text], input[type=password], input[type=number], input[type=date]{
     width: 92%;
     padding: 1% 5%;
     margin: 8px 0;
@@ -209,7 +210,7 @@ span.psw {
         width: 100%;
     }
 }
-select#type {
+select#tipoEvento {
     width: 92%;
     padding: 1% 5%;
     margin: 8px 0;
@@ -225,24 +226,20 @@ form#cadastroEvento {
 }
 
 td#cpf {
-    padding-left: 1.5%;
+    padding-left: 8%;
 }
 
 input#nomeid {
     padding: 1% 0% 1% 72%;
 }
 
-td#nome {
-    width:40%;
-    padding-left: 3%;
-}
 
-input#qnt {
+input#qntConvidados {
     width: 17%;
 }
 
 td#dataEvento {
-    padding-left: 3.8%;
+    padding-left: 7.8%;
 }
 
 input#data {
@@ -250,7 +247,7 @@ input#data {
 }
 
 td#cep_table {
-    padding-left: 1.5%;
+    padding-left: 7.8%;
 }
 
 input#rua {
@@ -267,5 +264,43 @@ td#nro {
 }
 
 td#rua_table {
-    padding-left: 4%;
+    padding-left: 1.5%;
 }
+
+button#cadastroEvento{
+    background-color: black;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    border: none;
+    cursor: pointer;
+    width: 22%;
+    margin-left: 37%;
+    margin-top: 2%;
+}
+
+td#servicos {
+    padding: 1%;
+    font-weight: bold;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #22eaaa;
+    color: black;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .closebtn:hover {
+        color: black;
+    }
