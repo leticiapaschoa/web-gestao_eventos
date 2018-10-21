@@ -30,14 +30,13 @@ CREATE TABLE funcionario(
     perfil_func INT FOREIGN KEY REFERENCES tipoPerfil(cod_perfil)
 );
 
--- TABELA SERVIÇO
+-- TABELA FUNCIONARIO
 CREATE TABLE servico(
     cod_serv INT IDENTITY(1,1) PRIMARY KEY,
     desc_serv VARCHAR(50)
 );
 
--- TABELA SERVICO_EVENTO
 CREATE TABLE servico_evento(
- cod_serv INT FOREIGN KEY REFERENCES servico(cod_serv), 
- cod_evento INT FOREIGN KEY REFERENCES evento(cod_evento)
-)
+	cod_serv INT FOREIGN KEY REFERENCES servico(cod_serv), 
+	cod_evento INT FOREIGN KEY REFERENCES evento(cod_evento)
+);
