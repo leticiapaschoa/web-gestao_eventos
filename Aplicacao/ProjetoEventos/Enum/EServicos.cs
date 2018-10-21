@@ -10,4 +10,4 @@ namespace ProjetoEventos.Enum
         Segurança
 
     }
-}
+ }
