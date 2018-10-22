@@ -17,9 +17,15 @@ namespace ProjetoEventos.Controllers
                 ETiposEvento tipoEvento = (ETiposEvento)Convert.ToInt16(Request.Form["tipoEvento"]);
                 DateTime dataEvento = Convert.ToDateTime(Request.Form["dataEvento"]);                
                 int qtdConvidados =  Convert.ToUInt16(Request.Form["qntConvidados"]);
-                List<string> servicos = Request.Form["servicos"].Split(',').ToList();
+                string servico = Request.Form["servicos"];
+                List<string> servicos = new List<string>();
                 String cepEvento = Request.Form["cep"].ToString();
-                String cpfEvento = Request.Form["cpf"];             
+                String cpfEvento = Request.Form["cpf"];
+
+                if (!string.IsNullOrEmpty(servico))
+                {
+                    servicos = servico.Split(',').ToList();
+                }
                                
                 Evento evento = new Evento();
                 evento.TipoEvento = tipoEvento;
@@ -30,21 +36,26 @@ namespace ProjetoEventos.Controllers
                 evento.Servicos = servicos;
 
                 string validaEvento = evento.ValidaEvento(evento);
-
+                                
+                //CADASTRA EVENTO
                 if (string.IsNullOrEmpty(validaEvento))
                 {
+                    //CALCULA EVENTO
+                    var valorCalculado = evento.CalculoEvento(servicos, qtdConvidados);
+                    evento.orcamento = valorCalculado;
+
                     if (evento.CadastraEvento(evento))
                     {
-                        ViewBag.Mensagem = "Evento Cadastrado com sucesso";
+                        ViewBag.MensagemSucesso = string.Format("Evento Cadastrado com sucesso. Orçamento final: R${0}", valorCalculado);
                     }
                     else
                     {
-                        ViewBag.Mensagem = string.Format("Erro não mapeado ao cadastrar o evento. Consulte o TI.");
+                        ViewBag.MensagemErro = string.Format("Erro não mapeado ao cadastrar o evento. Consulte o TI.");
                     }
                 }
                 else
                 {
-                    ViewBag.Mensagem = string.Format("Erro ao cadastrar evento: {0}", validaEvento);
+                    ViewBag.MensagemErro = string.Format("Erro ao cadastrar evento: {0}", validaEvento);
                 }
             }
 

@@ -282,12 +282,25 @@ button#cadastroEvento{
 td#servicos {
     padding: 1%;
     font-weight: bold;
+    padding-left: 8%;
 }
 
 .alert {
     padding: 20px;
     background-color: #22eaaa;
     color: black;
+    width: 80%;
+    text-align: center;
+    font-size: 13px;
+}
+
+.alertErro {
+    padding: 20px;
+    background-color: brown;
+    color: white;
+    width: 80%;
+    text-align: center;
+    font-size: 13px;
 }
 
 .closebtn {

@@ -17,6 +17,7 @@ namespace ProjetoEventos.Models
         public String CEP { get; set; }
         public int QntPessoas { get; set; }
         public List<string> Servicos { get; set; }
+        public double orcamento { get; set; }
 
 
         public bool CadastraEvento(Evento evento)
@@ -38,6 +39,7 @@ namespace ProjetoEventos.Models
                 cmd.Parameters.Add("@cep_evento", SqlDbType.VarChar).Value = evento.CEP;
                 cmd.Parameters.Add("@qnt_pessoas_evento", SqlDbType.Int).Value = evento.QntPessoas;
                 cmd.Parameters.Add("@cpf_cliente", SqlDbType.VarChar).Value = evento.CPFCliente;
+                cmd.Parameters.Add("@orcamento", SqlDbType.Decimal).Value = evento.orcamento;
 
                cmd.ExecuteNonQuery();
 
@@ -78,6 +80,60 @@ namespace ProjetoEventos.Models
                 return "Necessário ter ao menos uma pessoa no evento";
 
             return validacao;
+        }
+
+        public Double CalculoEvento(List<string> Servicos, int quantidadePessoas)
+        {
+            double valorFinal = 0.00;
+
+            var valorFixo = 0.00;
+            var valorUnit = 0.00;
+            var Is_fixo = false;
+            
+            var stringConnexao = "Server=tcp:unimetrocamp-project.database.windows.net,1433;Initial Catalog=GestaoEvento;Persist Security Info=False;User ID=leticiaps;Password=leticia_paschoa18;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
+            try
+            {
+                var connection = new SqlConnection(stringConnexao);
+                SqlDataReader reader;
+
+                connection.Open();
+
+                var cmd = new SqlCommand("BUSCA_SERVICO", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                foreach (var item in Servicos)
+                {
+                    cmd.Parameters.Add("@desc_servico", SqlDbType.VarChar).Value = item;
+                    
+                    reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Is_fixo = Convert.ToBoolean(reader["IN_PRECO_FIXO"]);
+                        valorFixo = Convert.ToDouble(reader["PRECO_FIXO"]);
+                        valorUnit = Convert.ToDouble(reader["PRECO_UNIT"]);
+
+                        if (Is_fixo)
+                        {
+                            valorFinal += valorFixo;
+                        }
+                        else
+                        {
+                            valorFinal += (valorUnit * quantidadePessoas);
+                        }
+                    }
+
+                    cmd.Parameters.Clear();
+                    reader.Close();
+                }
+
+            }catch(Exception ex)
+            {
+
+            }
+
+                return valorFinal;
         }
     }
 

@@ -40,3 +40,6 @@ CREATE TABLE servico_evento(
 	cod_serv INT FOREIGN KEY REFERENCES servico(cod_serv), 
 	cod_evento INT FOREIGN KEY REFERENCES evento(cod_evento)
 );
+
+ALTER TABLE servico
+ADD preco_unit DECIMAL
