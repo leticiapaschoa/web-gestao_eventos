@@ -32,8 +32,9 @@ textarea {
 }
 
 .container img {
-    width: 100%;
+    width: 14.1%;
     height: auto;
+    margin-left: -59%;
 }
 
  .container .btn {

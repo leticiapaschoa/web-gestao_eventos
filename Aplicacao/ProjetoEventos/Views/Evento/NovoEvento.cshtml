@@ -39,7 +39,7 @@
                     <td id="cpf">
                         <label for="cpf">CPF: </label>
                         <input type="text" id="cpf" required="required" name="cpf" />
-                        <button onclick="document.getElementById('idBuscaCliente').style.display='block'" style="width:auto;" target="_blank" id="Search" type="submit"><img src="~/Img/Icon/findClient.png" /></button>
+                        <button onclick="document.getElementById('idBuscaCliente').style.display='block'" style="width:auto;" target="_blank" id="Search" type="submit"><img src="~/Img/Icon/alerta.png" /></button>
                     </td>
 
                     <td id="tipoEvento">
@@ -94,22 +94,10 @@
 
 
     <div id="idBuscaCliente" class="modal">
-        <form class="modal-content animate" action="" method="post">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('idBuscaCliente').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
-            <div class="container">
-                <label for="nome_cliente" class="txt"><b>Nome:</b></label><br>
-                <input type="text" name="nome_cliente" required>
-                <br>
-                <label for="email_cliente" class="txt"><b>E-mail:</b></label><br>
-                <input type="text" name="email_cliente">
-                <br>
-                <label for="telefone_cliente" class="txt"><b>Telefone:</b></label><br>
-                <input type="text" name="telefone_cliente">
-                <button type="submit">Atualizar</button>
-            </div>
-        </form>
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>            
+            <a href="~/Views/Cliente/CadastrarCliente.cshtml" style="color:white">Caso o cliente não esteja cadastrado, cadastra-o aqui.</a>
+        </div>
     </div>
 
 
