@@ -8,8 +8,7 @@ namespace ProjetoEventos.Models
     public class Pessoa
     {
         public int codigoPessoa { get; set; }
-        public String nomePessoa { get; set; }
-        public String emailPessoa { get; set; }
+        public String nomePessoa { get; set; }        
         public String cpfPessoa { get; set; }
     }
 }

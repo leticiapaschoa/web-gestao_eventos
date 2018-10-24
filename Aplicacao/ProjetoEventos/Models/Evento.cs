@@ -1,4 +1,7 @@
-﻿using ProjetoEventos.Enum;
+﻿using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using ProjetoEventos.Enum;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -54,6 +57,8 @@ namespace ProjetoEventos.Models
                 }
                 
                 connection.Close();
+
+                AdicionarEventoCalendario(evento);
                 eventoCadastrado = true;
             }
             catch (Exception ex)
@@ -63,7 +68,7 @@ namespace ProjetoEventos.Models
 
             return eventoCadastrado;
         }
-
+              
         public String ValidaEvento(Evento evento)
         {
             String validacao = string.Empty;
@@ -78,6 +83,33 @@ namespace ProjetoEventos.Models
                 return "Necessário ter ao menos uma pessoa no evento";
 
             return validacao;
+        }
+
+        private void AdicionarEventoCalendario(Evento evento)
+        {
+            var service = new CalendarService(new BaseClientService.Initializer
+            {                
+                ApplicationName = "Calendar API Sample",
+            });
+            var myEvent = new Event
+            {
+                Summary = "Google Calendar Api Sample Code by Mukesh Salaria",
+                Location = "Gurdaspur, Punjab, India",
+                Start = new EventDateTime
+                {
+                    DateTime = new DateTime(2018, 3, 2, 6, 0, 0),
+                },
+                End = new EventDateTime
+                {
+                    DateTime = new DateTime(2018, 3, 2, 7, 30, 0),
+                },
+                Recurrence = new String[] { "RRULE:FREQ=WEEKLY;BYDAY=MO" },
+                
+            };
+
+            var recurringEvent = service.Events.Insert(myEvent, "primary");
+            recurringEvent.SendNotifications = true;
+            recurringEvent.Execute();
         }
     }
 

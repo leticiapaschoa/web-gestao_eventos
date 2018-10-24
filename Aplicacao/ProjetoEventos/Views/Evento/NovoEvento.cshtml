@@ -96,7 +96,9 @@
     <div id="idBuscaCliente" class="modal">
         <div class="alert">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>            
-            <a href="~/Views/Cliente/CadastrarCliente.cshtml" style="color:white">Caso o cliente não esteja cadastrado, cadastra-o aqui.</a>
+            <a id="linkCadastrarCliente">
+                @Html.ActionLink("Caso o cliente não esteja cadastrado, cadastra-o aqui.", "CadastrarCliente", "Cliente") 
+            </a>
         </div>
     </div>
 
