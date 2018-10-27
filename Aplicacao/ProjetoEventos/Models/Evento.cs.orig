@@ -87,6 +87,7 @@ namespace ProjetoEventos.Models
             return validacao;
         }
 
+<<<<<<< HEAD
         public Double CalculoEvento(List<string> Servicos, int quantidadePessoas)
         {
             double valorFinal = 0.00;
@@ -139,9 +140,34 @@ namespace ProjetoEventos.Models
             }
 
                 return valorFinal;
+=======
+        private void AdicionarEventoCalendario(Evento evento)
+        {
+            var service = new CalendarService(new BaseClientService.Initializer
+            {                
+                ApplicationName = "Calendar API Sample",
+            });
+            var myEvent = new Event
+            {
+                Summary = "Google Calendar Api Sample Code by Mukesh Salaria",
+                Location = "Gurdaspur, Punjab, India",
+                Start = new EventDateTime
+                {
+                    DateTime = new DateTime(2018, 3, 2, 6, 0, 0),
+                },
+                End = new EventDateTime
+                {
+                    DateTime = new DateTime(2018, 3, 2, 7, 30, 0),
+                },
+                Recurrence = new String[] { "RRULE:FREQ=WEEKLY;BYDAY=MO" },
+                
+            };
+
+            var recurringEvent = service.Events.Insert(myEvent, "primary");
+            recurringEvent.SendNotifications = true;
+            recurringEvent.Execute();
+>>>>>>> origin/Sprint3
         }
-        
-        
     }
 
     

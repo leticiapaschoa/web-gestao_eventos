@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<html>
+<head>
+    
+</head>
+<body>
+    @{
+        Html.RenderPartial("_Menu");
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>@ViewBag.Mensagem</strong>
+        </div>
+    }
+
+    <form id="cadastroEvento" method="POST">
+
+        <table style="width:100%" id="cadastroCliente">
+            <tr>
+                <td id="cpfCliente">
+                    <label for="cpfCliente">CPF: </label>
+                    <input type="text" id="cpfCliente" required="required" name="cpfCliente" />
+                </td>
+
+                <td id="nomeCliente">
+                    <label for="nomeCliente">Nome:</label>
+                    <input type="text" name="nomeCliente" required="required">
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td id="emailCliente">
+                    <label for="emailCliente">E-mail:</label>
+                    <input type="email" id="emailCliente" required="required" name="emailCliente" />
+                </td>
+
+                <td id="telCliente">
+                    <label for="telCliente">Telefone:</label>
+                    <input type="tel" id="telCliente" required="required" name="telCliente" />
+                </td>
+            </tr>            
+        </table>
+
+        <button id="cadastrarEvento" type="submit">Cadastrar usuário</button>
+
+    </form>
+</body>
+</html>
