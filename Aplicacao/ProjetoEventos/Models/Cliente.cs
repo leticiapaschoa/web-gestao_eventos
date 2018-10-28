@@ -27,20 +27,15 @@ namespace ProjetoEventos.Models
 
                 connection.Open();
 
-                //CADASTRA O EVENTO
+                //CADASTRA O CLIENTE
                 var cmd = new SqlCommand("CADASTRO_I_CLIENTE", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@cpf ", SqlDbType.VarChar).Value = cliente.cpfPessoa;
                 cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = cliente.nomePessoa;
                 cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = cliente.email;
-                cmd.Parameters.Add("@telefone", SqlDbType.Int).Value = cliente.telefone;               
+                cmd.Parameters.Add("@telefone", SqlDbType.VarChar).Value = cliente.telefone;               
 
                 cmd.ExecuteNonQuery();
-
-                //CADASTRA OS SERVIÇOS
-                cmd = new SqlCommand("CADASTRO_I_CLIENTE", connection);
-                cmd.CommandType = CommandType.StoredProcedure;
-
                 
                 connection.Close();
                

@@ -1,4 +1,5 @@
-﻿using Google.Apis.Calendar.v3;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using ProjetoEventos.Enum;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace ProjetoEventos.Models
@@ -41,6 +43,7 @@ namespace ProjetoEventos.Models
                 cmd.Parameters.Add("@cep_evento", SqlDbType.VarChar).Value = evento.CEP;
                 cmd.Parameters.Add("@qnt_pessoas_evento", SqlDbType.Int).Value = evento.QntPessoas;
                 cmd.Parameters.Add("@cpf_cliente", SqlDbType.VarChar).Value = evento.CPFCliente;
+                cmd.Parameters.Add("@orcamento", SqlDbType.Decimal).Value = CalculoEvento(evento.Servicos, evento.QntPessoas);
 
                cmd.ExecuteNonQuery();
 
@@ -85,31 +88,100 @@ namespace ProjetoEventos.Models
             return validacao;
         }
 
+
+        public Double CalculoEvento(List<string> Servicos, int quantidadePessoas)
+        {
+
+            double valorFinal = 0.00;
+            var valorFixo = 0.00;
+            var valorUnit = 0.00;
+            var Is_fixo = false;
+
+            var stringConnexao = "Server=tcp:unimetrocamp-project.database.windows.net,1433;Initial Catalog=GestaoEvento;Persist Security Info=False;User ID=leticiaps;Password=leticia_paschoa18;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            
+            try
+            {
+                var connection = new SqlConnection(stringConnexao);
+                SqlDataReader reader;
+                connection.Open();
+
+                var cmd = new SqlCommand("BUSCA_SERVICO", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                foreach (var item in Servicos)
+                {
+                    cmd.Parameters.Add("@desc_servico", SqlDbType.VarChar).Value = item;
+                    reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Is_fixo = Convert.ToBoolean(reader["IN_PRECO_FIXO"]);
+                        valorFixo = Convert.ToDouble(reader["PRECO_FIXO"]);
+                        valorUnit = Convert.ToDouble(reader["PRECO_UNIT"]);
+
+                        if (Is_fixo)
+                        {
+                            valorFinal += valorFixo;
+                        }
+                        else
+                        {
+                            valorFinal += (valorUnit * quantidadePessoas);
+                        }
+                    }
+                    cmd.Parameters.Clear();
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return valorFinal;
+
+        }
+
+
         private void AdicionarEventoCalendario(Evento evento)
         {
+            var credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                             new ClientSecrets
+                             {
+                                 ClientId = "446080177672-qfjs3fdnqsfv1inrd49cv9ui4octfbl1.apps.googleusercontent.com",
+                                 ClientSecret = "ffoy7wDbTU5sELFpdcWjSsvN ",
+                             },
+                             new[] { CalendarService.Scope.Calendar },
+                             "user",
+                             CancellationToken.None).Result;
+
+            // Create the service.
             var service = new CalendarService(new BaseClientService.Initializer
-            {                
+            {
+                HttpClientInitializer = credential,
                 ApplicationName = "Calendar API Sample",
             });
+
             var myEvent = new Event
             {
                 Summary = "Google Calendar Api Sample Code by Mukesh Salaria",
                 Location = "Gurdaspur, Punjab, India",
                 Start = new EventDateTime
                 {
-                    DateTime = new DateTime(2018, 3, 2, 6, 0, 0),
+                    DateTime = new DateTime(2015, 3, 2, 6, 0, 0),
                 },
                 End = new EventDateTime
                 {
-                    DateTime = new DateTime(2018, 3, 2, 7, 30, 0),
+                    DateTime = new DateTime(2015, 3, 2, 7, 30, 0),
                 },
                 Recurrence = new String[] { "RRULE:FREQ=WEEKLY;BYDAY=MO" },
-                
+                Attendees = new List<EventAttendee>()
+                {
+                new EventAttendee { Email = "programmer.mukesh01@gmail.com"}
+                },
             };
 
             var recurringEvent = service.Events.Insert(myEvent, "primary");
             recurringEvent.SendNotifications = true;
             recurringEvent.Execute();
+
         }
     }
 
