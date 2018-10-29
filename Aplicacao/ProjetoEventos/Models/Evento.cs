@@ -141,12 +141,13 @@ namespace ProjetoEventos.Models
 
 
         private void AdicionarEventoCalendario(Evento evento)
-        {
+        {  
+
             var credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                              new ClientSecrets
                              {
-                                 ClientId = "446080177672-qfjs3fdnqsfv1inrd49cv9ui4octfbl1.apps.googleusercontent.com",
-                                 ClientSecret = "ffoy7wDbTU5sELFpdcWjSsvN ",
+                                 ClientId = "446080177672-qfjs3fdnqsfv1inrd49cv9ui4octfbl1.apps.googleusercontent.com",                                             
+                                 ClientSecret = "ffoy7wDbTU5sELFpdcWjSsvN",                                                 
                              },
                              new[] { CalendarService.Scope.Calendar },
                              "user",
@@ -156,26 +157,28 @@ namespace ProjetoEventos.Models
             var service = new CalendarService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = credential,
-                ApplicationName = "Calendar API Sample",
+                ApplicationName = "Calendar API Sample"              
             });
 
             var myEvent = new Event
             {
-                Summary = "Google Calendar Api Sample Code by Mukesh Salaria",
-                Location = "Gurdaspur, Punjab, India",
+                Summary =  evento.TipoEvento.ToString(),
+                Description = $"Evento: {evento.CodigoEvento} - Quantidade de pessoas: {evento.QntPessoas} - " +
+                              $"Serviços: {string.Join(",", evento.Servicos.ToArray())}",
+                Location = evento.CEP,
                 Start = new EventDateTime
                 {
-                    DateTime = new DateTime(2015, 3, 2, 6, 0, 0),
+                    DateTime = evento.DataEvento,
+                    TimeZone = "America/Los_Angeles",
+
                 },
                 End = new EventDateTime
                 {
-                    DateTime = new DateTime(2015, 3, 2, 7, 30, 0),
+                    DateTime = evento.DataEvento.AddHours(5),
+                    TimeZone = "America/Los_Angeles",
+
                 },
-                Recurrence = new String[] { "RRULE:FREQ=WEEKLY;BYDAY=MO" },
-                Attendees = new List<EventAttendee>()
-                {
-                new EventAttendee { Email = "programmer.mukesh01@gmail.com"}
-                },
+                Recurrence = new String[] { "RRULE:FREQ=WEEKLY;BYDAY=MO" }               
             };
 
             var recurringEvent = service.Events.Insert(myEvent, "primary");
