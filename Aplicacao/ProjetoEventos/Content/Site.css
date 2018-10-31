@@ -236,7 +236,7 @@ input#nomeid {
 
 
 input#qntConvidados {
-    width: 17%;
+    width: 25%;
 }
 
 td#dataEvento {
@@ -314,3 +314,8 @@ td#nomeCliente {
     padding-left: 1.4%;
 }
 
+iframe {
+    
+    margin-bottom: -141%;    
+    margin-left: -97%;
+}

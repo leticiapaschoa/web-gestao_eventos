@@ -18,7 +18,7 @@ namespace ProjetoEventos.Models
         public int CodigoEvento { get; set; }
         public String CPFCliente { get; set; }
         public ETiposEvento TipoEvento { get; set; }
-        public DateTime DataEvento { get; set; }
+        public DateTime DataEvento { get; set; }        
         public String CEP { get; set; }
         public int QntPessoas { get; set; }
         public List<string> Servicos { get; set; }
@@ -142,7 +142,6 @@ namespace ProjetoEventos.Models
 
         private void AdicionarEventoCalendario(Evento evento)
         {  
-
             var credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                              new ClientSecrets
                              {
@@ -163,22 +162,21 @@ namespace ProjetoEventos.Models
             var myEvent = new Event
             {
                 Summary =  evento.TipoEvento.ToString(),
-                Description = $"Evento: {evento.CodigoEvento} - Quantidade de pessoas: {evento.QntPessoas} - " +
+                Description = $"Quantidade de pessoas: {evento.QntPessoas} - " +
                               $"Serviços: {string.Join(",", evento.Servicos.ToArray())}",
                 Location = evento.CEP,
                 Start = new EventDateTime
                 {
                     DateTime = evento.DataEvento,
-                    TimeZone = "America/Los_Angeles",
+                    TimeZone = "America/Sao_Paulo",
 
                 },
                 End = new EventDateTime
                 {
                     DateTime = evento.DataEvento.AddHours(5),
-                    TimeZone = "America/Los_Angeles",
+                    TimeZone = "America/Sao_Paulo",
 
-                },
-                Recurrence = new String[] { "RRULE:FREQ=WEEKLY;BYDAY=MO" }               
+                }
             };
 
             var recurringEvent = service.Events.Insert(myEvent, "primary");
