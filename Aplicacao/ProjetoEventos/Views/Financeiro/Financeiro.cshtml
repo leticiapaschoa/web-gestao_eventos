@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<html>
+<body>
+
+    @{
+        Html.RenderPartial("_Menu");
+    }
+    <h2>Gráficos de Gastos: </h2>
+    
+        @{
+            var myChart = new Chart(width: 600, height: 400)
+                .AddTitle("Chart Title")
+                .AddSeries(
+                    name: "Employee",
+                    xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
+                    yValues: new[] { "2", "6", "4", "5", "3" })
+                .Write();
+
+            myChart.Save(@"C:\Users\171150523\Projeto\GestaoEventos\Aplicacao\ProjetoEventos\Views\Financeiro\Chart\teste1", "jpeg");
+        }
+    
+    <div>
+        <img src="@myChart" />
+    </div>
+
+
+</body>
+</html>

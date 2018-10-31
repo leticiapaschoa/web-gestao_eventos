@@ -158,6 +158,7 @@
     <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
+    <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Enum\EServicos.cs" />
@@ -218,9 +219,12 @@
     <Content Include="Views\Funcionario\CadastrarFuncionario.cshtml" />
     <Content Include="Views\Cliente\CadastrarCliente.cshtml" />
     <Content Include="Views\Agenda\Agenda.cshtml" />
+    <Content Include="Views\Financeiro\Financeiro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\chart\" />
+    <Folder Include="Views\Financeiro\Chart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
