@@ -1,4 +1,5 @@
-﻿using Google.Apis.Calendar.v3;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using ProjetoEventos.Enum;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace ProjetoEventos.Models
@@ -16,7 +18,7 @@ namespace ProjetoEventos.Models
         public int CodigoEvento { get; set; }
         public String CPFCliente { get; set; }
         public ETiposEvento TipoEvento { get; set; }
-        public DateTime DataEvento { get; set; }
+        public DateTime DataEvento { get; set; }        
         public String CEP { get; set; }
         public int QntPessoas { get; set; }
         public List<string> Servicos { get; set; }
@@ -42,7 +44,7 @@ namespace ProjetoEventos.Models
                 cmd.Parameters.Add("@cep_evento", SqlDbType.VarChar).Value = evento.CEP;
                 cmd.Parameters.Add("@qnt_pessoas_evento", SqlDbType.Int).Value = evento.QntPessoas;
                 cmd.Parameters.Add("@cpf_cliente", SqlDbType.VarChar).Value = evento.CPFCliente;
-                cmd.Parameters.Add("@orcamento", SqlDbType.Decimal).Value = evento.orcamento;
+                cmd.Parameters.Add("@orcamento", SqlDbType.Decimal).Value = CalculoEvento(evento.Servicos, evento.QntPessoas);
 
                cmd.ExecuteNonQuery();
 
@@ -87,21 +89,21 @@ namespace ProjetoEventos.Models
             return validacao;
         }
 
+
         public Double CalculoEvento(List<string> Servicos, int quantidadePessoas)
         {
-            double valorFinal = 0.00;
 
+            double valorFinal = 0.00;
             var valorFixo = 0.00;
             var valorUnit = 0.00;
             var Is_fixo = false;
-            
-            var stringConnexao = "Server=tcp:unimetrocamp-project.database.windows.net,1433;Initial Catalog=GestaoEvento;Persist Security Info=False;User ID=leticiaps;Password=leticia_paschoa18;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
+            var stringConnexao = "Server=tcp:unimetrocamp-project.database.windows.net,1433;Initial Catalog=GestaoEvento;Persist Security Info=False;User ID=leticiaps;Password=leticia_paschoa18;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            
             try
             {
                 var connection = new SqlConnection(stringConnexao);
                 SqlDataReader reader;
-
                 connection.Open();
 
                 var cmd = new SqlCommand("BUSCA_SERVICO", connection);
@@ -110,7 +112,6 @@ namespace ProjetoEventos.Models
                 foreach (var item in Servicos)
                 {
                     cmd.Parameters.Add("@desc_servico", SqlDbType.VarChar).Value = item;
-                    
                     reader = cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -128,15 +129,68 @@ namespace ProjetoEventos.Models
                             valorFinal += (valorUnit * quantidadePessoas);
                         }
                     }
-
                     cmd.Parameters.Clear();
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return valorFinal;
+
+        }
+
+
+        {  
+            var credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                             new ClientSecrets
+                             {
+                                 ClientId = "446080177672-qfjs3fdnqsfv1inrd49cv9ui4octfbl1.apps.googleusercontent.com",                                             
+                                 ClientSecret = "ffoy7wDbTU5sELFpdcWjSsvN",                                                 
+                             },
+                             new[] { CalendarService.Scope.Calendar },
+                             "user",
+                             CancellationToken.None).Result;
+
+            // Create the service.
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = "Calendar API Sample"              
+
+
+
+                var cmd = new SqlCommand("BUSCA_SERVICO", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                foreach (var item in Servicos)
+                {
+                Summary =  evento.TipoEvento.ToString(),
+                Description = $"Quantidade de pessoas: {evento.QntPessoas} - " +
+                              $"Serviços: {string.Join(",", evento.Servicos.ToArray())}",
+                Location = evento.CEP,
+                    while (reader.Read())
+                    {
+                    DateTime = evento.DataEvento,
+                    TimeZone = "America/Sao_Paulo",
+
+
+                        if (Is_fixo)
+                        {
+                    DateTime = evento.DataEvento.AddHours(5),
+                    TimeZone = "America/Sao_Paulo",
+                        {
+                            valorFinal += (valorUnit * quantidadePessoas);
+                        }
+                    }
+
+                }
                     reader.Close();
                 }
 
             }catch(Exception ex)
             {
 
-            }
+
 
                 return valorFinal;
         }
