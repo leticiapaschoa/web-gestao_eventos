@@ -319,3 +319,11 @@ iframe {
     margin-bottom: -141%;    
     margin-left: -97%;
 }
+
+canvas#mChart2 {
+    padding: 0px !important;
+    margin: auto !important;
+    display: block;
+    width: 50% !important;
+    height: 50% !important;
+}
